@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Nileshingle.GitHub.io : Github Projects">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Nilesh Ingle</title>
+            <!-- Script to include code in HTML .............. -->
+           <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js"></script>
+            <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js"></script> <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shLegacy.js"></script>
+            <link type="text/css" rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css" />
+            <link type="text/css" rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css" />     <script language="javascript">
+            window.onload = function () {
+                dp.SyntaxHighlighter.ClipboardSwf = 'http://alexgorbatchev.com/pub/sh/2.1.364/scripts/clipboard.swf';
+                dp.SyntaxHighlighter.HighlightAll('code');
+                dp.SyntaxHighlighter.BloggerMode();
+            }
+            </script>
+            <!-- ............................... -->
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nileshingle">View on GitHub</a>
+
+          <h1 id="project_title">Nilesh Ingle</h1>
+          <h2 id="project_tagline">Github Projects</h2>
+        </header>
+          <ul class="nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>        
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+<h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>6. SQL</h3>
+<p><em>Posted: May 19, 2016; Updated: May 20, 2016</em></p>
+
+<p align="justify"> This project focusses on use of SQL to extract data from a clean database for analysis. The database was imported in <a href= "http://www.oracle.com/technetwork/developer-tools/sql-developer/overview/index-097090.html">Oracle SQL Developer (Version 4.1.3.20)</a>. The SQL script was written in SQL Developer for extracting data and creating charts. The objective in the project was to first ask a random question based on available tables in database. Then write a script i.e. query in SQL to extract that information. Finally, one or two charts or plots were created from the report-generator in SQL Developer. The complete script for all the queries are uploaded in Github repository.</p>
+
+<p> <h5>Source of Data:</h5> The 'Chinook' database analyzed was downloaded from <a href="https://chinookdatabase.codeplex.com/">CodePlex.</a>
+
+<p> <h5>Questions asked:</h5>
+    <ol>
+    <li>Find customers who purchased 'Aerosmith' tracks? </li>
+    <li>Which states and countries have purchases for 'Metallica' tracks?</li>
+    <li>Which month had the highest number of orders or any tracks?</li>
+    <li>Which year had the highest number of orders or any tracks?</li>
+    <li>What are the top trending mediat types?</li> 
+    <li>What are the top 'Genre'?</li>
+    <li>What is the lowest priced media type?</li>
+    <li>What are the highest buying customers?</li>
+    <li>Which are the top earning tracks?</li>
+    <li>Which are the top grossing artists?</li>
+    <li>Which are the top grossing albums?</li>
+    <li>In which country did the employees primarily help most customers?</li>
+  </ol>
+</p>
+
+<p> <h5>Possible answers:</h5>
+    <ol>
+    <li> Shown in sample code below</li>
+    <li> USA, Denmark, Canada, United Kingdom etc.</li>
+    <li> The highest orders were for the month of January of 34.</li>
+    <li> The years 2009 to 2012 had highest number of 83 orders.</li> 
+    <li> The top trending media type was 'MPEG audio file' with 1976 orders.</li>
+    <li> The top trending Genre was 'Rock' with 835 orders.</li>
+    <li> The lowest priced media types were 'AAC audio file', 'MPEG audio file', 'Protected AAC audio file'. 'Purchased AAC audio file'. All had unit price of $0.99.</li>
+    <li> The highest purchases were made by the customer named 'Helena Holy' with a total amount of $49.62.</li>
+    <li> The top earning track was 'The Trooper' grossing $4.95.</li>
+    <li> The top grossing artist was 'Iron Maiden' at $138.6.</li>
+    <li> The top grossing album was 'Battlestar Galactica (Classic), Season 1' at $35.82.</li>
+
+  </ol>
+
+</p>
+
+<p> <h5>Sample code:</h5></p>
+<p>
+<pre class="brush: ruby" name="code">-- Find customers who purchased 'Aersosmith' tracks
+SELECT album.title, artist.name, track.name, customer.firstname, customer.lastname
+FROM album 
+  INNER JOIN artist
+    ON album.artistid = artist.artistid
+      INNER JOIN track
+        ON album.albumid = track.albumid
+          INNER JOIN invoiceline
+            ON track.trackid = invoiceline.trackid
+              INNER JOIN invoice
+                ON invoiceline.invoiceid = invoice.invoiceid
+                  INNER JOIN customer
+                    ON invoice.customerid = customer.customerid
+WHERE artist.name = 'Aerosmith';
+</pre>
+<pre class="brush: ruby" name="code">--Query result:
+  TITLE     NAME           TRACK        FIRSTNAME  LAST NAME
+Big Ones  Aerosmith Love In An Elevator    Daan  Peeters
+Big Ones  Aerosmith Rag Doll               Phil  Hughes
+Big Ones  Aerosmith What It Takes          Ellie Sullivan
+Big Ones  Aerosmith Janie's Got A Gun      Daan  Peeters
+Big Ones  Aerosmith Amazing                Heather Leacock
+Big Ones  Aerosmith Blind Man              Phil  Hughes
+Big Ones  Aerosmith Deuces Are Wild        Ellie Sullivan
+Big Ones  Aerosmith Deuces Are Wild        Daan  Peeters
+Big Ones  Aerosmith Angel                  Daan  Peeters
+Big Ones  Aerosmith Livin' On The Edge     Phil  Hughes
+</pre>
+
+
+<pre class="brush: ruby" name="code">-- Which are the top grossing artists?
+SELECT artist.name, SUM(invoiceline.unitprice) AS Price
+FROM artist
+  INNER JOIN album
+    ON artist.artistid = album.artistid
+      INNER JOIN track
+        ON album.albumid = track.albumid
+          INNER JOIN invoiceline
+            ON track.trackid = invoiceline.trackid
+GROUP BY artist.name
+ORDER  BY SUM(invoiceline.unitprice) DESC;
+</pre>
+
+<pre class="brush: ruby" name="code">-- In which country did the employees primarily help most customers?
+SELECT CONCAT(employee.firstname, CONCAT(' ', employee.lastname)) AS employee_name, 
+customer.country, Count(*)
+FROM employee
+  INNER JOIN customer
+    ON employee.employeeid = customer.supportrepid
+      INNER JOIN INVOICE
+        ON customer.customerid = invoice.customerid
+GROUP BY CONCAT(employee.firstname, CONCAT(' ', employee.lastname)), customer.country 
+ORDER BY employee_name, Count(*) DESC;
+</pre>
+<pre class="brush: ruby" name="code">--Query result (partial only)
+  EMPLOYEE_NAME COUNTRY COUNT(*)
+Jane Peacock  Canada          35
+Jane Peacock  USA             21
+Jane Peacock  France          14
+Jane Peacock  Brazil          14
+Jane Peacock  Germany         14
+Jane Peacock  United Kingdom  14
+Jane Peacock  India           13
+Jane Peacock  Finland          7
+Jane Peacock  Hungary          7
+Jane Peacock  Ireland          7
+Margaret Park USA             42
+Margaret Park Brazil          14
+Margaret Park Portugal        14
+Margaret Park France          14
+Margaret Park Belgium          7
+Margaret Park Argentina        7
+Margaret Park Denmark          7
+Margaret Park Australia        7
+Margaret Park Canada           7
+Margaret Park Poland           7
+Margaret Park Czech Republic   7
+Margaret Park Norway           7
+Steve Johnson USA             28
+(continued...)
+</pre>
+
+<p> <h5>Figure gallery:</h5>
+  <figure><img src="images/sql/Top_grossing_artist.png" alt="Plot_1">
+  <figcaption> Figure 1: (Question 10) Top grossing artist.</figcaption></figure><br>
+
+<figure><img src="images/sql/employee_help.png" alt="Plot_2">
+  <figcaption> Figure 2: (Question 12) Employee helped customers in countries.</figcaption></figure><br>
+
+
+
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>

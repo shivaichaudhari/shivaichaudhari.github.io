@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Nileshingle.GitHub.io : Github Projects">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Nilesh Ingle</title>
+            <!-- Script to include code in HTML .............. -->
+           <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shCore.js"></script>
+            <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shBrushRuby.js"></script> <script type="text/javascript" src="http://alexgorbatchev.com/pub/sh/2.1.364/scripts/shLegacy.js"></script>
+            <link type="text/css" rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/2.1.364/styles/shCore.css" />
+            <link type="text/css" rel="stylesheet" href="http://alexgorbatchev.com/pub/sh/2.1.364/styles/shThemeDefault.css" />     <script language="javascript">
+            window.onload = function () {
+                dp.SyntaxHighlighter.ClipboardSwf = 'http://alexgorbatchev.com/pub/sh/2.1.364/scripts/clipboard.swf';
+                dp.SyntaxHighlighter.HighlightAll('code');
+                dp.SyntaxHighlighter.BloggerMode();
+            }
+            </script>
+            <!-- ............................... -->
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nileshingle">View on GitHub</a>
+
+          <h1 id="project_title">Nilesh Ingle</h1>
+          <h2 id="project_tagline">Github Projects</h2>
+        </header>
+          <ul class="nav">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact.html">Contact</a></li>
+          </ul>        
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+
+<h3>
+<a id="designer-templates" class="anchor" href="#designer-templates" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Frequency of characters in resume</h3>
+<p><em>Posted: April 11, 2016; Updated: April 12, 2016</em></p>
+
+<p>In this project the R script reads a plain text resume to generate a bar plot of all the characters.</p>
+
+<p>
+<pre class="brush: ruby" name="code"># R/RStudio code
+setwd("D:/Oht/R/Resume_char_freq")
+library(ggplot2)
+library(stringr)
+
+# read text file into a vector
+cc <- scan("res.txt", what = "", sep = "")
+# clean the vector
+cc_split <- strsplit(cc, "")
+cc_vect <- rle(unlist(cc_split))$values
+cc_vect_strip <- str_replace_all(cc_vect, "[^[:alnum:]]|\\s", " ")
+cc_clean <- gsub(" ", "", cc_vect_strip)
+cc_new <- cc_clean[cc_clean != ""]
+
+barplot(table(cc_new),main = "Frequency of Characters in Resume",
+        xlab = "Characters", ylab="Frequency",las=2)
+</pre>
+</p>
+
+
+<img src="images/res_char_freq/resume_char_freq.png" alt="Plot of frequency of characters in resume">
+
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
